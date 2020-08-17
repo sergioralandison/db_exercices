@@ -5,7 +5,7 @@
 echo "<table style='border: solid 1px black;'>";
 echo "<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>";
 
-class TableRows2 extends RecursiveIteratorIterator {
+class TableRows extends RecursiveIteratorIterator {
   function __construct($it) {
     parent::__construct($it, self::LEAVES_ONLY);
   }
@@ -31,7 +31,7 @@ try {
 
   // set the resulting array to associative
   $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-  foreach(new TableRows2(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+  foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
     echo $v;
   }
 } catch(PDOException $e) {
