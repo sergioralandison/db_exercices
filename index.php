@@ -23,14 +23,6 @@ class TableRowsA extends RecursiveIteratorIterator {
   }
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_exercices";
-
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $stmt = $conn->prepare("SELECT * FROM `datas` WHERE `email` LIKE '%google%'");
   $stmt->execute();
 
@@ -39,23 +31,10 @@ try {
   foreach(new TableRowsA(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
     echo $v;
   }
-} catch(PDOException $e) {
-  echo "Error: " . $e->getMessage();
-}
-$conn = null;
+
 echo "</table>";
 
 /*--------------------------------Requête n°6 : mettre à jour l'adresse email de la nouvelle personne--------------------------------*/
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_exercices";
-
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   $sql = "UPDATE `datas` SET `email` = 'swilliams@gmail.com' WHERE `first_name` = 'Sara' AND `last_name` = 'Williams'";
 
@@ -67,10 +46,5 @@ try {
 
   // echo a message to say the UPDATE succeeded
   echo $stmt->rowCount() . " records UPDATED successfully";
-} catch(PDOException $e) {
-  echo $sql . "<br>" . $e->getMessage();
-}
-
-$conn = null;
 
 ?>
