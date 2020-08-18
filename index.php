@@ -36,7 +36,7 @@ echo "</table>";
 
 /*--------------------------------Requête n°6 : mettre à jour l'adresse email de la nouvelle personne--------------------------------*/
 
-  $sql = "UPDATE `datas` SET `email` = 'swilliams@gmail.com' WHERE `first_name` = 'Sara' AND `last_name` = 'Williams'";
+  $sql = "UPDATE `datas` SET `email` = 'swilliams@gmail.com' WHERE `email` = 'swilliams@icloud.com'";
 
   // Prepare statement
   $stmt = $conn->prepare($sql);
