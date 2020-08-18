@@ -23,15 +23,7 @@ class TableRows extends RecursiveIteratorIterator {
   }
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_exercices";
-
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $stmt = $conn->prepare("SELECT * FROM `datas` WHERE `state_code` LIKE 'N%'");
+  $stmt = $conn->prepare("SELECT * FROM `datas` WHERE `country_code` LIKE 'N%'");
   $stmt->execute();
 
   // set the resulting array to associative
@@ -39,10 +31,7 @@ try {
   foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
     echo $v;
   }
-} catch(PDOException $e) {
-  echo "Error: " . $e->getMessage();
-}
-$conn = null;
+
 echo "</table>";
 echo "<br>";
 
