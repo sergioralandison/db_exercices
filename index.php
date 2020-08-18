@@ -23,14 +23,14 @@ class TableRowsA extends RecursiveIteratorIterator {
   }
 }
 
-  $stmt = $conn->prepare("SELECT * FROM `datas` WHERE `gender` = 'Female'");
-  $stmt->execute();
+$stmt = $conn->prepare("SELECT * FROM `datas` WHERE `gender` = 'Female'");
+$stmt->execute();
 
-  // set the resulting array to associative
-  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-  foreach(new TableRowsA(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-    echo $v;
-  }
+// set the resulting array to associative
+$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+foreach(new TableRowsA(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+  echo $v;
+}
 
 echo "</table>";
 
@@ -54,23 +54,17 @@ class TableRowsB extends RecursiveIteratorIterator {
   }
 }
 
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $stmt = $conn->prepare("SELECT
-                          (SELECT COUNT(*) FROM `datas` WHERE `gender` = 'Male'),
-                          (SELECT COUNT(*) FROM `datas` WHERE `gender` = 'Female')");
-  $stmt->execute();
+$stmt = $conn->prepare("SELECT
+                        (SELECT COUNT(*) FROM `datas` WHERE `gender` = 'Male'),
+                        (SELECT COUNT(*) FROM `datas` WHERE `gender` = 'Female')");
+$stmt->execute();
 
-  // set the resulting array to associative
-  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-  foreach(new TableRowsB(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-    echo $v;
-  }
-} catch(PDOException $e) {
-  echo "Error: " . $e->getMessage();
+// set the resulting array to associative
+$result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+foreach(new TableRowsB(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+  echo $v;
 }
-$conn = null;
+
 echo "</table>";
 
 ?>
