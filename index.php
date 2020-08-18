@@ -23,14 +23,6 @@ class TableRows extends RecursiveIteratorIterator {
   }
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_exercices";
-
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $stmt = $conn->prepare("SELECT * FROM `datas` WHERE `last_name` = 'Palmer'");
   $stmt->execute();
 
@@ -39,10 +31,7 @@ try {
   foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
     echo $v;
   }
-} catch(PDOException $e) {
-  echo "Error: " . $e->getMessage();
-}
-$conn = null;
+
 echo "</table>";
 
 ?>
