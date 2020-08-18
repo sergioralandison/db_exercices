@@ -23,9 +23,6 @@ class TableRowsA extends RecursiveIteratorIterator {
   }
 }
 
-try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $stmt = $conn->prepare("SELECT * FROM `datas` WHERE `gender` = 'Female'");
   $stmt->execute();
 
@@ -34,10 +31,7 @@ try {
   foreach(new TableRowsA(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
     echo $v;
   }
-} catch(PDOException $e) {
-  echo "Error: " . $e->getMessage();
-}
-$conn = null;
+
 echo "</table>";
 
 /*--------------------------------Requête n°8 : afficher le nombre de femmes et le nombre d’hommes--------------------------------*/
